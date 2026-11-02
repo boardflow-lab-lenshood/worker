@@ -80,6 +80,7 @@ def invalid_messages() -> list[tuple[str, str, str]]:
 class WorkerIntegrationTests(unittest.TestCase):
     image: str
     evidence_dir: Path
+    owner_card: str
 
     @classmethod
     def setUpClass(cls) -> None:
@@ -90,7 +91,13 @@ class WorkerIntegrationTests(unittest.TestCase):
         cls.worker = cls.prefix + "-worker"
         cls.containers: list[str] = []
         cls.addClassCleanup(cls.cleanup)
-        docker("network", "create", "--internal", cls.network)
+        cls.labels = ["--label", f"boardflow.card_id={cls.owner_card}"]
+        docker("network", "create", "--internal", *cls.labels, cls.network)
+        cls.evidence_dir.joinpath("fixture.json").write_text(json.dumps({
+            "owner_card": cls.owner_card, "network": cls.network, "internal": True,
+            "postgres": cls.pg, "redis": cls.redis, "worker": cls.worker,
+            "worker_image": cls.image, "worker_arguments": [], "published_ports": [],
+        }, indent=2) + "\n")
         password = secrets.token_urlsafe(24)
         fixture_env = {**os.environ, "POSTGRES_PASSWORD": password,
                        "DATABASE_CONNECTION_STRING":
@@ -100,7 +107,7 @@ class WorkerIntegrationTests(unittest.TestCase):
             (cls.redis, "redis", "redis:7-alpine", []),
         ]:
             cls.containers.append(name)
-            docker("run", "-d", "--name", name, "--network", cls.network,
+            docker("run", "-d", "--name", name, *cls.labels, "--network", cls.network,
                    "--network-alias", alias, *options, image, env=fixture_env, timeout=120)
         wait_for(lambda: subprocess.run(
             ["docker", "exec", cls.pg, "pg_isready", "-U", "postgres", "-d", "votes"],
@@ -109,12 +116,23 @@ class WorkerIntegrationTests(unittest.TestCase):
             ["docker", "exec", cls.redis, "redis-cli", "ping"], text=True,
             capture_output=True, timeout=30).stdout.strip() == "PONG", "Redis readiness")
         cls.containers.append(cls.worker)
-        docker("run", "--pull=never", "-d", "--name", cls.worker, "--network", cls.network,
+        docker("run", "--pull=never", "-d", "--name", cls.worker, *cls.labels, "--network", cls.network,
                "-e", "DATABASE_CONNECTION_STRING", cls.image, env=fixture_env)
         cls.enqueue(json.dumps({"voter_id": "fixture-ready", "vote": "a"}))
         wait_for(lambda: "Found redis" in cls.logs(), "worker Redis connection")
         wait_for(lambda: cls.rows() == [{"id": "fixture-ready", "vote": "a"}],
                  "initial real end-to-end vote")
+        inspections = json.loads(docker("inspect", *cls.containers))
+        cls.evidence_dir.joinpath("container-config.json").write_text(json.dumps([
+            {"name": item["Name"], "image_id": item["Image"],
+             "entrypoint": item["Config"]["Entrypoint"], "cmd": item["Config"]["Cmd"],
+             "labels": item["Config"]["Labels"],
+             "network_mode": item["HostConfig"]["NetworkMode"],
+             "port_bindings": item["HostConfig"]["PortBindings"]}
+            for item in inspections
+        ], indent=2) + "\n")
+        cls.evidence_dir.joinpath("network-config.json").write_text(
+            docker("network", "inspect", cls.network) + "\n")
 
     @classmethod
     def cleanup(cls) -> None:
@@ -205,9 +223,18 @@ class WorkerIntegrationTests(unittest.TestCase):
     def test_updates_existing_vote_when_same_voter_changes_from_a_to_b(self) -> None:
         self.enqueue(json.dumps({"voter_id": "change-voter", "vote": "a"}))
         wait_for(lambda: self.rows() == [{"id": "change-voter", "vote": "a"}], "initial a vote")
+        initial_rows = self.rows()
         self.enqueue(json.dumps({"voter_id": "change-voter", "vote": "b"}))
         wait_for(lambda: self.rows() == [{"id": "change-voter", "vote": "b"}], "updated b vote")
         self.assert_alive()
+        queue_length = docker("exec", self.redis, "redis-cli", "LLEN", "votes")
+        self.assertEqual("0", queue_length)
+        self.evidence_dir.joinpath("legacy-vote.json").write_text(json.dumps({
+            "messages": [{"voter_id": "change-voter", "vote": "a"},
+                         {"voter_id": "change-voter", "vote": "b"}],
+            "initial_rows": initial_rows, "updated_rows": self.rows(),
+            "queue_length": int(queue_length), "worker_running": True,
+        }, indent=2) + "\n")
 
     def test_z_reports_database_error_when_valid_vote_violates_database_constraint(self) -> None:
         self.sql("ALTER TABLE votes ADD CONSTRAINT fixture_failure CHECK (vote <> 'b')")
@@ -226,7 +253,9 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--image", required=True, help="Worker image built from this checkout")
     parser.add_argument("--evidence-dir", type=Path, required=True)
+    parser.add_argument("--owner-card", default="local-worker-input")
     args = parser.parse_args()
+    WorkerIntegrationTests.owner_card = args.owner_card
     WorkerIntegrationTests.image = args.image
     WorkerIntegrationTests.evidence_dir = args.evidence_dir.resolve()
     WorkerIntegrationTests.evidence_dir.mkdir(parents=True, exist_ok=True)

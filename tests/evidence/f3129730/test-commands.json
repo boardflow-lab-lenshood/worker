@@ -1,0 +1,32 @@
+{
+  "offline_cli": {
+    "command": [
+      "python3",
+      "f3129730-worker/tests/version.py",
+      "--image",
+      "worker-f3129730:offline-version",
+      "--evidence-dir",
+      "f3129730-worker/tests/evidence/f3129730/version-with-tmpfs",
+      "--owner-card",
+      "f312973006e748058646b4729f18c7aa"
+    ],
+    "exit_code": 0,
+    "passed_tests": 2,
+    "tests_log": "version-with-tmpfs/tests.log"
+  },
+  "default_worker": {
+    "command": [
+      "python3",
+      "f3129730-worker/tests/integration.py",
+      "--image",
+      "worker-f3129730:offline-version",
+      "--evidence-dir",
+      "f3129730-worker/tests/evidence/f3129730/integration",
+      "--owner-card",
+      "f312973006e748058646b4729f18c7aa"
+    ],
+    "exit_code": 0,
+    "passed_tests": 5,
+    "tests_log": "integration/tests.log"
+  }
+}

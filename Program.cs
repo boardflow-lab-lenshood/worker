@@ -14,6 +14,16 @@ namespace Worker
     {
         public static int Main(string[] args)
         {
+            if (args.Length == 1 && args[0] == "--version")
+            {
+                Console.WriteLine(JsonSerializer.Serialize(new
+                {
+                    service = "worker",
+                    version = "arena-seven-20261103"
+                }));
+                return 0;
+            }
+
             try
             {
                 var pgsql = OpenDbConnection(Environment.GetEnvironmentVariable("DATABASE_CONNECTION_STRING")

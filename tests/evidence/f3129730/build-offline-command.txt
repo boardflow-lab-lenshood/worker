@@ -1,0 +1,1 @@
+docker build --force-rm --network none --label boardflow.card_id=f312973006e748058646b4729f18c7aa -t worker-f3129730:offline-version f3129730-offline-build-context

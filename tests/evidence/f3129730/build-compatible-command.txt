@@ -1,0 +1,1 @@
+docker build --force-rm -f f3129730-worker/tests/evidence/f3129730/Dockerfile.legacy --build-arg BUILDPLATFORM=linux/arm64 --build-arg TARGETPLATFORM=linux/arm64 --build-arg TARGETARCH=arm64 --label boardflow.card_id=f312973006e748058646b4729f18c7aa -t worker-f3129730:offline-version f3129730-worker

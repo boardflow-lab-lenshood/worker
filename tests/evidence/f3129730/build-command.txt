@@ -1,0 +1,1 @@
+docker buildx build --load --progress=plain -t worker-f3129730:offline-version f3129730-worker

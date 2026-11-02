@@ -1,0 +1,114 @@
+[
+  {
+    "id": "Npgsql",
+    "version": "4.1.9",
+    "url": "https://api.nuget.org/v3-flatcontainer/npgsql/4.1.9/npgsql.4.1.9.nupkg",
+    "sha256": "d8a296db6b76849cd6bcf25756655c8d5bb040eedd22efc323ad792ed9b838ad",
+    "dependency_group": ".NETCoreApp3.0"
+  },
+  {
+    "id": "System.Runtime.CompilerServices.Unsafe",
+    "version": "4.6.0",
+    "url": "https://api.nuget.org/v3-flatcontainer/system.runtime.compilerservices.unsafe/4.6.0/system.runtime.compilerservices.unsafe.4.6.0.nupkg",
+    "sha256": "1538d078cbafaa72b1a6856c561fce950db534c699885b4e76fed5759f88bf76",
+    "dependency_group": ".NETCoreApp2.0"
+  },
+  {
+    "id": "StackExchange.Redis",
+    "version": "2.2.4",
+    "url": "https://api.nuget.org/v3-flatcontainer/stackexchange.redis/2.2.4/stackexchange.redis.2.2.4.nupkg",
+    "sha256": "1473bec673d879fd3b95978482a673cdc634ea4573db82bf822ba702683e4d7b",
+    "dependency_group": ".NETCoreApp3.1"
+  },
+  {
+    "id": "Pipelines.Sockets.Unofficial",
+    "version": "2.2.0",
+    "url": "https://api.nuget.org/v3-flatcontainer/pipelines.sockets.unofficial/2.2.0/pipelines.sockets.unofficial.2.2.0.nupkg",
+    "sha256": "5c66e4e804aee3d2aa51e3153765f8e253d7835926dd6bc6c6dfc1c3f20444db",
+    "dependency_group": "net5.0"
+  },
+  {
+    "id": "System.IO.Pipelines",
+    "version": "5.0.0",
+    "url": "https://api.nuget.org/v3-flatcontainer/system.io.pipelines/5.0.0/system.io.pipelines.5.0.0.nupkg",
+    "sha256": "a39013693d77b7f43e7a310eef437da8ecdbd9d2eb8d8c426dad6994f25fbbcd",
+    "dependency_group": ".NETCoreApp3.0"
+  },
+  {
+    "id": "System.Diagnostics.PerformanceCounter",
+    "version": "5.0.0",
+    "url": "https://api.nuget.org/v3-flatcontainer/system.diagnostics.performancecounter/5.0.0/system.diagnostics.performancecounter.5.0.0.nupkg",
+    "sha256": "da3ab33fbf63cd0d0b59470173f073ee5fac445e57cdb24e02e343d88b5a656e",
+    "dependency_group": ".NETCoreApp2.1"
+  },
+  {
+    "id": "Microsoft.NETCore.Platforms",
+    "version": "5.0.0",
+    "url": "https://api.nuget.org/v3-flatcontainer/microsoft.netcore.platforms/5.0.0/microsoft.netcore.platforms.5.0.0.nupkg",
+    "sha256": "2c8720d52b437102cf380069e0945722cf37eddef3d226bafbefb7485de39757",
+    "dependency_group": null
+  },
+  {
+    "id": "Microsoft.Win32.Registry",
+    "version": "5.0.0",
+    "url": "https://api.nuget.org/v3-flatcontainer/microsoft.win32.registry/5.0.0/microsoft.win32.registry.5.0.0.nupkg",
+    "sha256": "f64ca53c67ca65ce7cc85a8d29aefbb2da2672836731e1115e8cd62730dc5080",
+    "dependency_group": ".NETCoreApp2.1"
+  },
+  {
+    "id": "System.Security.AccessControl",
+    "version": "5.0.0",
+    "url": "https://api.nuget.org/v3-flatcontainer/system.security.accesscontrol/5.0.0/system.security.accesscontrol.5.0.0.nupkg",
+    "sha256": "b9e486f989fcd9ebf1c86067138f4de03fa780e0c35e0a2b9e506d4373a6c39e",
+    "dependency_group": ".NETCoreApp2.0"
+  },
+  {
+    "id": "System.Security.Principal.Windows",
+    "version": "5.0.0",
+    "url": "https://api.nuget.org/v3-flatcontainer/system.security.principal.windows/5.0.0/system.security.principal.windows.5.0.0.nupkg",
+    "sha256": "081390c25f6f78592b28ada853c24514488a221fe9f9a24efaaf5373643ff3d6",
+    "dependency_group": ".NETCoreApp3.0"
+  },
+  {
+    "id": "System.Configuration.ConfigurationManager",
+    "version": "5.0.0",
+    "url": "https://api.nuget.org/v3-flatcontainer/system.configuration.configurationmanager/5.0.0/system.configuration.configurationmanager.5.0.0.nupkg",
+    "sha256": "f3e4509d73a63d9b5cbda2742fc80c4ade30c1da68ceeaa40259fdaa97fad522",
+    "dependency_group": ".NETStandard2.0"
+  },
+  {
+    "id": "System.Security.Cryptography.ProtectedData",
+    "version": "5.0.0",
+    "url": "https://api.nuget.org/v3-flatcontainer/system.security.cryptography.protecteddata/5.0.0/system.security.cryptography.protecteddata.5.0.0.nupkg",
+    "sha256": "2b74c4389f776b3ccb3228adcd8761247ac17d1beaa146b96e5e385524cb014b",
+    "dependency_group": ".NETCoreApp2.1"
+  },
+  {
+    "id": "System.Security.Permissions",
+    "version": "5.0.0",
+    "url": "https://api.nuget.org/v3-flatcontainer/system.security.permissions/5.0.0/system.security.permissions.5.0.0.nupkg",
+    "sha256": "048d49b372f8477d9490a38b313015a57cc6950dbb9bea1a607495dc9fa241f7",
+    "dependency_group": ".NETCoreApp5.0"
+  },
+  {
+    "id": "System.Windows.Extensions",
+    "version": "5.0.0",
+    "url": "https://api.nuget.org/v3-flatcontainer/system.windows.extensions/5.0.0/system.windows.extensions.5.0.0.nupkg",
+    "sha256": "7f35a76910420eea2ade142c1888b43ef08424def219a689be553aa6ae34e760",
+    "dependency_group": ".NETCoreApp3.0"
+  },
+  {
+    "id": "System.Drawing.Common",
+    "version": "5.0.0",
+    "url": "https://api.nuget.org/v3-flatcontainer/system.drawing.common/5.0.0/system.drawing.common.5.0.0.nupkg",
+    "sha256": "f0f805059dc081df9423d20cc6be1f4485bc200d61a82975e67aa52d32444f39",
+    "dependency_group": ".NETCoreApp3.0"
+  },
+  {
+    "id": "Microsoft.Win32.SystemEvents",
+    "version": "5.0.0",
+    "url": "https://api.nuget.org/v3-flatcontainer/microsoft.win32.systemevents/5.0.0/microsoft.win32.systemevents.5.0.0.nupkg",
+    "sha256": "98650a83e6e6079b04fc30b0b13c02b1b7b4d0c0b0a60c6c556de70ad4224a6a",
+    "dependency_group": ".NETCoreApp3.0"
+  }
+]

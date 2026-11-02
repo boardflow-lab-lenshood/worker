@@ -1,0 +1,6 @@
+Removed resources:
+worker-input-test-df56350b56b6-worker
+worker-input-test-df56350b56b6-redis
+worker-input-test-df56350b56b6-db
+worker-input-test-df56350b56b6-network
+Errors:

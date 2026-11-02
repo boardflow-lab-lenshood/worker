@@ -1,0 +1,65 @@
+[
+    {
+        "Name": "worker-input-test-df56350b56b6-network",
+        "Id": "92f44867053e0fc33021e7d9d80717e345f61c1dd71bbca12287b09fe2e68a68",
+        "Created": "2026-11-02T18:07:54.977668891Z",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv4": true,
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": {},
+            "Config": [
+                {
+                    "Subnet": "172.31.0.0/16",
+                    "Gateway": "172.31.0.1"
+                }
+            ]
+        },
+        "Internal": true,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Options": {},
+        "Labels": {
+            "boardflow.card_id": "f312973006e748058646b4729f18c7aa"
+        },
+        "Containers": {
+            "461398a40ba7c67d456d65ce57c62855f6b4572992b9ddeb544f82641dd62839": {
+                "Name": "worker-input-test-df56350b56b6-worker",
+                "EndpointID": "6ae32fe413317af373a8d791f21a32c63d8bdda5fd62ec235337a3c3b2eaf10d",
+                "MacAddress": "4e:91:73:6a:55:63",
+                "IPv4Address": "172.31.0.4/16",
+                "IPv6Address": ""
+            },
+            "b28303a508d75d7836947766d34217895584afaab2ec8a04bde9cbb5aa3f3e0c": {
+                "Name": "worker-input-test-df56350b56b6-redis",
+                "EndpointID": "7cb9afae7ac469567fb8ce75d938aab34c81baa131fe2f2cf2a369b20e1416bf",
+                "MacAddress": "8a:f5:8c:1f:b5:a9",
+                "IPv4Address": "172.31.0.3/16",
+                "IPv6Address": ""
+            },
+            "fe171b57fcfb6deaafe7307a9b0514dbf8863f22cac880c3e635e05ec2391714": {
+                "Name": "worker-input-test-df56350b56b6-db",
+                "EndpointID": "745cbda8c54be656c05356ffe85633946c523fac96770506e0f9f32a35ca33d4",
+                "MacAddress": "a2:bb:75:18:20:6d",
+                "IPv4Address": "172.31.0.2/16",
+                "IPv6Address": ""
+            }
+        },
+        "Status": {
+            "IPAM": {
+                "Subnets": {
+                    "172.31.0.0/16": {
+                        "IPsInUse": 6,
+                        "DynamicIPsAvailable": 65530
+                    }
+                }
+            }
+        }
+    }
+]

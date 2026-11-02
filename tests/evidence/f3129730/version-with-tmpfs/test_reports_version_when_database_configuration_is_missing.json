@@ -1,0 +1,56 @@
+{
+  "command": [
+    "docker",
+    "create",
+    "--pull=never",
+    "--name",
+    "worker-version-71982b988c8e",
+    "--label",
+    "boardflow.card_id=f312973006e748058646b4729f18c7aa",
+    "--network",
+    "none",
+    "--read-only",
+    "--cap-drop=ALL",
+    "--tmpfs",
+    "/tmp:rw,noexec,nosuid,size=16m",
+    "worker-f3129730:offline-version",
+    "--version"
+  ],
+  "start_command": [
+    "docker",
+    "start",
+    "-a",
+    "worker-version-71982b988c8e"
+  ],
+  "image_id": "sha256:f8e7991e25c954ebb277ed6691999378e9ae397f6b7ea6bf88abc9ce2925df1f",
+  "network_mode": "none",
+  "networks": {
+    "none": {
+      "IPAMConfig": null,
+      "Links": null,
+      "Aliases": null,
+      "DriverOpts": null,
+      "GwPriority": 0,
+      "NetworkID": "490e9b5d9676d9f9f5971cb50662b04a2e6c4eaf505878ce1b559f4b28d56ad0",
+      "EndpointID": "",
+      "Gateway": "",
+      "IPAddress": "",
+      "MacAddress": "",
+      "IPPrefixLen": 0,
+      "IPv6Gateway": "",
+      "GlobalIPv6Address": "",
+      "GlobalIPv6PrefixLen": 0,
+      "DNSNames": null
+    }
+  },
+  "read_only": true,
+  "tmpfs": {
+    "/tmp": "rw,noexec,nosuid,size=16m"
+  },
+  "owner_card": "f312973006e748058646b4729f18c7aa",
+  "stdout": "{\"service\":\"worker\",\"version\":\"arena-seven-20261103\"}\n",
+  "stderr": "",
+  "docker_exit_code": 0,
+  "process_exit_code": 0,
+  "running": false
+}
