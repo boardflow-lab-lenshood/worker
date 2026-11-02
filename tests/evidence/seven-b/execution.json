@@ -1,0 +1,34 @@
+{
+  "protocol": "board-delivery/v2",
+  "action": "DEVELOP",
+  "card_id": "5c9d713506a0481c9987c941f5725862",
+  "project_id": "f201b22780c04e3ba17bec61c9fcd5c3",
+  "execution_id": "cdc40638b9134bdbae567b9265a7bc80",
+  "context": {
+    "batch_id": null,
+    "revision": null,
+    "candidate": null,
+    "target_main": [
+      {"repository_id": "result", "sha": "65b9eccdddff2c1e938259e60ffb175c52458294"},
+      {"repository_id": "vote", "sha": "de00436924ec030b08cba2724efb3a21b590dfd5"},
+      {"repository_id": "worker", "sha": "c955288f250cfc4edf74675e106859aff56c6c60"}
+    ],
+    "spec_revision": "3836c777a2c64a07b0f6c9766b838d39",
+    "baseline_epoch": 1,
+    "delivery_round": 1,
+    "test_plan_revision": null,
+    "data_scope_ref": null,
+    "release_target_ref": null
+  },
+  "modified_repositories": ["worker"],
+  "required_checks": [],
+  "resource_refs": ["ae4c2ab16e5fc3aae0bb56707412161a78f834bcba045e9d33dcababcf568d39"],
+  "worker_branch": "codex/seven-b-trace-5c9d7135",
+  "worker_image": "sha256:455a8a6b478a652cfd53fbc396e47ec6803140ebfdca3989d513f8c8a95c9986",
+  "baseline_image": "sha256:2d5ab8a568cb4602389ed86352e986a109e259489c51abc0a698ea5baa745fc2",
+  "build_limitations": [
+    "Docker buildx is unavailable in the execution environment.",
+    "Fresh NuGet restore failed with NU1301 (https://api.nuget.org/v3/index.json unreachable).",
+    "Actual current Program.cs compiled successfully using tests/Dockerfile.offline and fixed baseline dependency assemblies."
+  ]
+}

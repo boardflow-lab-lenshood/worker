@@ -5,6 +5,8 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using System.Text.Json;
+using System.Text.RegularExpressions;
+using NpgsqlTypes;
 using Npgsql;
 using StackExchange.Redis;
 
@@ -12,6 +14,9 @@ namespace Worker
 {
     public class Program
     {
+        private static readonly Regex TraceIdPattern = new Regex(
+            @"\A[A-Za-z0-9][A-Za-z0-9._:-]{0,63}\z", RegexOptions.CultureInvariant);
+
         public static int Main(string[] args)
         {
             if (args.Length == 1 && args[0] == "--version")
@@ -50,7 +55,7 @@ namespace Worker
                     string json = redis.ListLeftPopAsync("votes").Result;
                     if (json != null)
                     {
-                        if (!TryReadVote(json, out var voterId, out var vote))
+                        if (!TryReadVote(json, out var voterId, out var vote, out var traceId))
                         {
                             continue;
                         }
@@ -63,7 +68,7 @@ namespace Worker
                         }
                         else
                         { // Normal +1 vote requested
-                            UpdateVote(pgsql, voterId, vote);
+                            UpdateVote(pgsql, voterId, vote, traceId);
                         }
                     }
                     else
@@ -88,7 +93,9 @@ namespace Worker
             InvalidVoterIdType,
             InvalidVoteType,
             InvalidVoterId,
-            InvalidVote
+            InvalidVote,
+            InvalidTraceIdType,
+            InvalidTraceId
         }
 
         private static bool RejectVote(RejectionReason reason)
@@ -101,10 +108,11 @@ namespace Worker
             return false;
         }
 
-        private static bool TryReadVote(string json, out string voterId, out string vote)
+        private static bool TryReadVote(string json, out string voterId, out string vote, out string traceId)
         {
             voterId = null;
             vote = null;
+            traceId = null;
             JsonDocument message;
             try
             {
@@ -133,6 +141,14 @@ namespace Worker
 
                     voterId = idField.GetString();
                     vote = voteField.GetString();
+                    if (root.TryGetProperty("trace_id", out var traceField))
+                    {
+                        if (traceField.ValueKind != JsonValueKind.String)
+                            return RejectVote(RejectionReason.InvalidTraceIdType);
+                        traceId = traceField.GetString();
+                        if (!TraceIdPattern.IsMatch(traceId))
+                            return RejectVote(RejectionReason.InvalidTraceId);
+                    }
                 }
                 catch (InvalidOperationException)
                 {
@@ -178,7 +194,8 @@ namespace Worker
             command.CommandText = @"CREATE TABLE IF NOT EXISTS votes (
                                         id VARCHAR(255) NOT NULL UNIQUE,
                                         vote VARCHAR(255) NOT NULL
-                                    )";
+                                    );
+                                    ALTER TABLE votes ADD COLUMN IF NOT EXISTS trace_id VARCHAR(64)";
             command.ExecuteNonQuery();
 
             return connection;
@@ -212,19 +229,20 @@ namespace Worker
                 .First(a => a.AddressFamily == AddressFamily.InterNetwork)
                 .ToString();
 
-        private static void UpdateVote(NpgsqlConnection connection, string voterId, string vote)
+        private static void UpdateVote(NpgsqlConnection connection, string voterId, string vote, string traceId)
         {
             var command = connection.CreateCommand();
             try
             {
-                command.CommandText = "INSERT INTO votes (id, vote) VALUES (@id, @vote)";
+                command.CommandText = "INSERT INTO votes (id, vote, trace_id) VALUES (@id, @vote, @trace_id)";
                 command.Parameters.AddWithValue("@id", voterId);
                 command.Parameters.AddWithValue("@vote", vote);
+                command.Parameters.Add("@trace_id", NpgsqlDbType.Varchar).Value = (object)traceId ?? DBNull.Value;
                 command.ExecuteNonQuery();
             }
             catch (PostgresException ex) when (ex.SqlState == PostgresErrorCodes.UniqueViolation)
             {
-                command.CommandText = "UPDATE votes SET vote = @vote WHERE id = @id";
+                command.CommandText = "UPDATE votes SET vote = @vote, trace_id = @trace_id WHERE id = @id";
                 command.ExecuteNonQuery();
             }
             finally

@@ -1,0 +1,8 @@
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            BuildKit is currently disabled; enable it by removing the DOCKER_BUILDKIT=0
+            environment-variable.
+
+Sending build context to Docker daemon  60.93kB
+
+Step 1/14 : FROM --platform=${BUILDPLATFORM} mcr.microsoft.com/dotnet/sdk:7.0 AS build
+failed to parse platform : "" is an invalid OS component of "": OSAndVersion specifier component must match "^([A-Za-z0-9_-]+)(?:\\(([A-Za-z0-9_.-]*)\\))?$": invalid argument

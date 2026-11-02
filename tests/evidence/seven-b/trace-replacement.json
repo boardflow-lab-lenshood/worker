@@ -1,0 +1,10 @@
+{
+  "rows": [
+    {
+      "id": "trace-change",
+      "vote": "b",
+      "trace_id": "Trace.same-vote"
+    }
+  ],
+  "queue_length": 0
+}

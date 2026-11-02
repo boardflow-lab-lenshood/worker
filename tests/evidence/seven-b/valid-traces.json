@@ -1,0 +1,30 @@
+{
+  "rows": [
+    {
+      "id": "valid-trace-0",
+      "vote": "a",
+      "trace_id": "A"
+    },
+    {
+      "id": "valid-trace-1",
+      "vote": "a",
+      "trace_id": "0"
+    },
+    {
+      "id": "valid-trace-2",
+      "vote": "a",
+      "trace_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    {
+      "id": "valid-trace-3",
+      "vote": "a",
+      "trace_id": "Zz09._:-"
+    },
+    {
+      "id": "valid-trace-4",
+      "vote": "a",
+      "trace_id": "A.zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
+    }
+  ],
+  "queue_length": 0
+}

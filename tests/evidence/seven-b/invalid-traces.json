@@ -1,0 +1,33 @@
+{
+  "total": 27,
+  "passed": 27,
+  "cases": [
+    "null",
+    "integer",
+    "decimal",
+    "boolean",
+    "array",
+    "object",
+    "empty",
+    "65-characters",
+    "unicode",
+    "unicode-digit",
+    "unicode-letter",
+    "nul",
+    "leading-dot",
+    "leading-underscore",
+    "leading-colon",
+    "leading-hyphen",
+    "space",
+    "leading-space",
+    "trailing-space",
+    "tab",
+    "newline",
+    "trailing-newline",
+    "carriage-return",
+    "slash",
+    "plus",
+    "backslash",
+    "emoji"
+  ]
+}

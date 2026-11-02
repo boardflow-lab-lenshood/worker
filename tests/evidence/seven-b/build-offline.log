@@ -1,0 +1,38 @@
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            BuildKit is currently disabled; enable it by removing the DOCKER_BUILDKIT=0
+            environment-variable.
+
+Sending build context to Docker daemon   68.1kB
+
+Step 1/11 : ARG WORKER_BASE=boardflow-real-uat/worker:c955288f250cfc4edf74675e106859aff56c6c60
+Step 2/11 : FROM ${WORKER_BASE} AS dependencies
+ ---> 2d5ab8a568cb
+Step 3/11 : FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+ ---> d32bd65cf584
+Step 4/11 : WORKDIR /source
+ ---> Running in db857cfb5d30
+ ---> Removed intermediate container db857cfb5d30
+ ---> f9e9003351b9
+Step 5/11 : COPY --from=dependencies /app /dependencies
+ ---> 1bf76195bc87
+Step 6/11 : COPY tests/Worker.offline.csproj Worker.csproj
+ ---> 3883a97dbf53
+Step 7/11 : COPY Program.cs .
+ ---> 115af6fcd6c0
+Step 8/11 : RUN dotnet publish -c Release -o /out -p:UseAppHost=false --ignore-failed-sources
+ ---> Running in fd11737d945a
+MSBuild version 17.7.6+77d58ec69 for .NET
+  Determining projects to restore...
+  Restored /source/Worker.csproj (in 25 ms).
+  Worker -> /source/bin/Release/net7.0/Worker.dll
+  Worker -> /out/
+ ---> Removed intermediate container fd11737d945a
+ ---> 2be3c937428f
+Step 9/11 : FROM dependencies
+ ---> 2d5ab8a568cb
+Step 10/11 : COPY --from=build /out/Worker.dll /app/Worker.dll
+ ---> 07b6ed022945
+Step 11/11 : COPY --from=build /out/Worker.pdb /app/Worker.pdb
+ ---> 455a8a6b478a
+Successfully built 455a8a6b478a
+Successfully tagged worker-seven-b:5c9d7135
