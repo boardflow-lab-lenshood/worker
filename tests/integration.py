@@ -108,13 +108,20 @@ class WorkerIntegrationTests(unittest.TestCase):
         wait_for(lambda: subprocess.run(
             ["docker", "exec", cls.redis, "redis-cli", "ping"], text=True,
             capture_output=True, timeout=30).stdout.strip() == "PONG", "Redis readiness")
+        cls.sql("CREATE TABLE votes (id VARCHAR(255) NOT NULL UNIQUE, vote VARCHAR(255) NOT NULL); "
+                "INSERT INTO votes (id, vote) VALUES ('pre-migration', 'b')")
         cls.containers.append(cls.worker)
         docker("run", "--pull=never", "-d", "--name", cls.worker, "--network", cls.network,
                "-e", "DATABASE_CONNECTION_STRING", cls.image, env=fixture_env)
         cls.enqueue(json.dumps({"voter_id": "fixture-ready", "vote": "a"}))
         wait_for(lambda: "Found redis" in cls.logs(), "worker Redis connection")
-        wait_for(lambda: cls.rows() == [{"id": "fixture-ready", "vote": "a"}],
-                 "initial real end-to-end vote")
+        wait_for(lambda: cls.rows() == [{"id": "fixture-ready", "vote": "a"},
+                                       {"id": "pre-migration", "vote": "b"}],
+                 "initial real end-to-end vote and preserved old data")
+        migration = cls.sql("SELECT json_agg(t) FROM "
+                            "(SELECT id, vote, trace_id FROM votes ORDER BY id) t")
+        cls.evidence_dir.joinpath("migration.json").write_text(migration + "\n")
+        cls.sql("DELETE FROM votes WHERE id = 'pre-migration'")
 
     @classmethod
     def cleanup(cls) -> None:
