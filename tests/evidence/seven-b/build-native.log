@@ -1,0 +1,36 @@
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            BuildKit is currently disabled; enable it by removing the DOCKER_BUILDKIT=0
+            environment-variable.
+
+Sending build context to Docker daemon  66.61kB
+
+Step 1/15 : ARG BUILDPLATFORM
+Step 2/15 : FROM --platform=${BUILDPLATFORM} mcr.microsoft.com/dotnet/sdk:7.0 AS build
+ ---> d32bd65cf584
+Step 3/15 : ARG TARGETPLATFORM
+ ---> Running in 117f3287f2f3
+ ---> Removed intermediate container 117f3287f2f3
+ ---> 8d3f2ac82e21
+Step 4/15 : ARG TARGETARCH
+ ---> Running in 0da7f8dd869d
+ ---> Removed intermediate container 0da7f8dd869d
+ ---> 299ea0e1f763
+Step 5/15 : ARG BUILDPLATFORM
+ ---> Running in 026ed8fb79d1
+ ---> Removed intermediate container 026ed8fb79d1
+ ---> 1ef38324ad48
+Step 6/15 : RUN echo "I am running on $BUILDPLATFORM, building for $TARGETPLATFORM"
+ ---> Running in bd7942ddbd9c
+I am running on linux/arm64, building for linux/arm64
+ ---> Removed intermediate container bd7942ddbd9c
+ ---> 31988ca92fed
+Step 7/15 : WORKDIR /source
+ ---> Running in 98266333236e
+ ---> Removed intermediate container 98266333236e
+ ---> 947ce61e32b3
+Step 8/15 : COPY *.csproj .
+ ---> 72c1c6f08131
+Step 9/15 : RUN dotnet restore -a $TARGETARCH
+ ---> Running in 4156b03b2113
+  Determining projects to restore...
+/source/Worker.csproj : error NU1301: Unable to load the service index for source https://api.nuget.org/v3/index.json.

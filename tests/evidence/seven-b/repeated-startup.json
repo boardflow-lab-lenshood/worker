@@ -1,0 +1,10 @@
+{
+  "rows": [
+    {
+      "id": "restart-voter",
+      "vote": "b",
+      "trace_id": "B.restart:1"
+    }
+  ],
+  "queue_length": 0
+}

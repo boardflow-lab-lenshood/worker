@@ -1,0 +1,6 @@
+Removed resources:
+worker-input-test-d189dbdd3945-worker
+worker-input-test-d189dbdd3945-redis
+worker-input-test-d189dbdd3945-db
+worker-input-test-d189dbdd3945-network
+Errors:
