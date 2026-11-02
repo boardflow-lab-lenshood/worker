@@ -44,7 +44,7 @@ The normal repository Dockerfile remains unchanged; local buildx/NuGet network
 limitations from the original acceptance are handled by this recorded recipe.
 
 The acceptance image is `worker-f3129730:epoch3`, ID
-`sha256:360dbc094a9ba6e4601dd4ba36f661215937c4d72924988cf6b771a8d3ae68b6`.
+`sha256:a0456e5daf66fe398e0cfc7d4f089e61927626e4159e04155ced0c926b5dc2b2`.
 `source-hashes.json` identifies the tested merge commit and exact Program.cs and
 Worker.csproj hashes. These hashes were checked against the final checkout.
 `image.json` and per-container inspections confirm the tested image identity.
