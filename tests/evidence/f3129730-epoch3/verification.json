@@ -1,0 +1,46 @@
+{
+  "card_id": "f312973006e748058646b4729f18c7aa",
+  "execution_id": "49582800d7304bc1a93c578567d4cbde",
+  "baseline_epoch": 3,
+  "suites": {
+    "version": {
+      "tests": 2,
+      "unittest_seconds": 2.351
+    },
+    "integration": {
+      "tests": 5,
+      "unittest_seconds": 72.261
+    },
+    "trace": {
+      "tests": 16,
+      "unittest_seconds": 129.094
+    }
+  },
+  "all_suites_exit_0": true,
+  "total_tests_including_inherited_regressions": 23,
+  "compiled_source_hashes_match": true,
+  "cleanup_query_commands": {
+    "containers": [
+      "docker",
+      "ps",
+      "-a",
+      "--filter",
+      "label=boardflow.card_id=f312973006e748058646b4729f18c7aa",
+      "--format",
+      "{{.ID}}"
+    ],
+    "networks": [
+      "docker",
+      "network",
+      "ls",
+      "--filter",
+      "label=boardflow.card_id=f312973006e748058646b4729f18c7aa",
+      "--format",
+      "{{.ID}}"
+    ]
+  },
+  "remaining_owned_resources": {
+    "containers": [],
+    "networks": []
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "card_id": "f312973006e748058646b4729f18c7aa",
+  "execution_id": "49582800d7304bc1a93c578567d4cbde",
+  "baseline_epoch": 3,
+  "delivery_round": 1,
+  "spec_revision": "137f4ab0435b4ddfa8bf8a1b95d98079",
+  "branch": "codex/f3129730-worker-offline-version",
+  "pull_request": "https://github.com/boardflow-lab-lenshood/worker/pull/5",
+  "fixed_worker_base": "36d5f71fd38f9c194b0650fdd5268015e7377083",
+  "merge_commit": "a667d8492575447d7a1378fee0abe6c72c61b160",
+  "merge_parents": [
+    "f7e775cfabe4b1546e6169f02f0420bc32776ec8",
+    "36d5f71fd38f9c194b0650fdd5268015e7377083"
+  ],
+  "fixed_worker_base_is_ancestor": true,
+  "conflict_resolution": "Preserved both baseline old-table migration verification and F-card fixture ownership/config evidence. Trace test CLI accepts owner-card for inherited fixture setup."
+}

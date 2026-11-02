@@ -1,0 +1,26 @@
+{
+  "messages": [
+    {
+      "voter_id": "change-voter",
+      "vote": "a"
+    },
+    {
+      "voter_id": "change-voter",
+      "vote": "b"
+    }
+  ],
+  "initial_rows": [
+    {
+      "id": "change-voter",
+      "vote": "a"
+    }
+  ],
+  "updated_rows": [
+    {
+      "id": "change-voter",
+      "vote": "b"
+    }
+  ],
+  "queue_length": 0,
+  "worker_running": true
+}

@@ -1,0 +1,11 @@
+{
+  "owner_card": "f312973006e748058646b4729f18c7aa",
+  "network": "worker-input-test-c8fa7b814ca5-network",
+  "internal": true,
+  "postgres": "worker-input-test-c8fa7b814ca5-db",
+  "redis": "worker-input-test-c8fa7b814ca5-redis",
+  "worker": "worker-input-test-c8fa7b814ca5-worker",
+  "worker_image": "worker-f3129730:epoch3",
+  "worker_arguments": [],
+  "published_ports": []
+}

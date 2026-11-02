@@ -1,0 +1,72 @@
+Found redis at 192.168.48.3
+Connected to db
+Connecting to redis
+{"event":"vote_rejected","reason":"InvalidJson"}
+{"event":"vote_rejected","reason":"InvalidJson"}
+{"event":"vote_rejected","reason":"InvalidJson"}
+{"event":"vote_rejected","reason":"InvalidJson"}
+{"event":"vote_rejected","reason":"InvalidJson"}
+{"event":"vote_rejected","reason":"InvalidJson"}
+{"event":"vote_rejected","reason":"InvalidJson"}
+{"event":"vote_rejected","reason":"InvalidJson"}
+{"event":"vote_rejected","reason":"InvalidJson"}
+{"event":"vote_rejected","reason":"NonObject"}
+{"event":"vote_rejected","reason":"NonObject"}
+{"event":"vote_rejected","reason":"NonObject"}
+{"event":"vote_rejected","reason":"NonObject"}
+{"event":"vote_rejected","reason":"NonObject"}
+{"event":"vote_rejected","reason":"MissingVoterId"}
+{"event":"vote_rejected","reason":"MissingVoterId"}
+{"event":"vote_rejected","reason":"MissingVote"}
+{"event":"vote_rejected","reason":"InvalidVoterIdType"}
+{"event":"vote_rejected","reason":"InvalidVoterIdType"}
+{"event":"vote_rejected","reason":"InvalidVoterIdType"}
+{"event":"vote_rejected","reason":"InvalidVoterIdType"}
+{"event":"vote_rejected","reason":"InvalidVoterIdType"}
+{"event":"vote_rejected","reason":"InvalidVoterIdType"}
+{"event":"vote_rejected","reason":"InvalidVoteType"}
+{"event":"vote_rejected","reason":"InvalidVoteType"}
+{"event":"vote_rejected","reason":"InvalidVoteType"}
+{"event":"vote_rejected","reason":"InvalidVoteType"}
+{"event":"vote_rejected","reason":"InvalidVoteType"}
+{"event":"vote_rejected","reason":"InvalidVoteType"}
+{"event":"vote_rejected","reason":"InvalidVoterId"}
+{"event":"vote_rejected","reason":"InvalidVoterId"}
+{"event":"vote_rejected","reason":"InvalidVoterId"}
+{"event":"vote_rejected","reason":"InvalidVoterId"}
+{"event":"vote_rejected","reason":"InvalidVoterId"}
+{"event":"vote_rejected","reason":"InvalidVoterId"}
+{"event":"vote_rejected","reason":"InvalidVoterId"}
+{"event":"vote_rejected","reason":"InvalidVote"}
+{"event":"vote_rejected","reason":"InvalidVote"}
+{"event":"vote_rejected","reason":"InvalidVote"}
+{"event":"vote_rejected","reason":"InvalidVote"}
+{"event":"vote_rejected","reason":"InvalidVote"}
+{"event":"vote_rejected","reason":"InvalidVote"}
+{"event":"vote_rejected","reason":"InvalidVote"}
+{"event":"vote_rejected","reason":"InvalidVote"}
+{"event":"vote_rejected","reason":"InvalidVote"}
+Npgsql.PostgresException (0x80004005): 23514: new row for relation "votes" violates check constraint "fixture_failure"
+   at Npgsql.NpgsqlConnector.<>c__DisplayClass160_0.<<DoReadMessage>g__ReadMessageLong|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Npgsql.NpgsqlConnector.<>c__DisplayClass160_0.<<DoReadMessage>g__ReadMessageLong|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming)
+   at Npgsql.NpgsqlDataReader.NextResult()
+   at Npgsql.NpgsqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteNonQuery(Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteNonQuery()
+   at Worker.Program.UpdateVote(NpgsqlConnection connection, String voterId, String vote, String traceId) in /source/Program.cs:line 241
+   at Worker.Program.Main(String[] args) in /source/Program.cs:line 71
+  Exception data:
+    Severity: ERROR
+    SqlState: 23514
+    MessageText: new row for relation "votes" violates check constraint "fixture_failure"
+    Detail: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+    SchemaName: public
+    TableName: votes
+    ConstraintName: fixture_failure
+    File: execMain.c
+    Line: 2074
+    Routine: ExecConstraints
+

@@ -1,0 +1,21 @@
+test_clears_trace_when_legacy_message_changes_vote (__main__.TraceIntegrationTests.test_clears_trace_when_legacy_message_changes_vote) ... ok
+test_keeps_existing_vote_when_trace_update_is_invalid (__main__.TraceIntegrationTests.test_keeps_existing_vote_when_trace_update_is_invalid) ... ok
+test_migrates_existing_data_when_worker_starts (__main__.TraceIntegrationTests.test_migrates_existing_data_when_worker_starts) ... ok
+test_preserves_data_when_worker_restarts_twice (__main__.TraceIntegrationTests.test_preserves_data_when_worker_restarts_twice) ... ok
+test_rejects_trace_when_escaped_unicode_is_invalid (__main__.TraceIntegrationTests.test_rejects_trace_when_escaped_unicode_is_invalid) ... ok
+test_rejects_trace_without_writing_when_present_value_is_invalid (__main__.TraceIntegrationTests.test_rejects_trace_without_writing_when_present_value_is_invalid) ... ok
+test_rejects_without_writing_or_exiting_when_message_is_invalid (__main__.TraceIntegrationTests.test_rejects_without_writing_or_exiting_when_message_is_invalid) ... ok
+test_replaces_current_trace_when_same_voter_changes_vote (__main__.TraceIntegrationTests.test_replaces_current_trace_when_same_voter_changes_vote) ... ok
+test_stores_both_choices_when_valid_votes_follow_invalid_messages (__main__.TraceIntegrationTests.test_stores_both_choices_when_valid_votes_follow_invalid_messages) ... ok
+test_stores_exact_ids_when_strings_meet_length_and_whitespace_rules (__main__.TraceIntegrationTests.test_stores_exact_ids_when_strings_meet_length_and_whitespace_rules) ... ok
+test_stores_exact_trace_when_ascii_contract_is_valid (__main__.TraceIntegrationTests.test_stores_exact_trace_when_ascii_contract_is_valid) ... ok
+test_stores_null_trace_when_legacy_message_inserts_vote (__main__.TraceIntegrationTests.test_stores_null_trace_when_legacy_message_inserts_vote) ... ok
+test_stores_trace_when_valid_message_follows_invalid_trace (__main__.TraceIntegrationTests.test_stores_trace_when_valid_message_follows_invalid_trace) ... ok
+test_updates_existing_vote_when_same_voter_changes_from_a_to_b (__main__.TraceIntegrationTests.test_updates_existing_vote_when_same_voter_changes_from_a_to_b) ... ok
+test_z_reports_database_error_when_valid_vote_violates_database_constraint (__main__.TraceIntegrationTests.test_z_reports_database_error_when_valid_vote_violates_database_constraint) ... ok
+test_zz_reports_infrastructure_error_when_redis_queue_has_wrong_type (__main__.TraceIntegrationTests.test_zz_reports_infrastructure_error_when_redis_queue_has_wrong_type) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 129.094s
+
+OK

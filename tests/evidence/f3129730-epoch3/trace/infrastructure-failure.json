@@ -1,0 +1,7 @@
+{
+  "fault": "owned Redis votes key changed from list to string",
+  "worker_exit_code": 1,
+  "rejection_count_before": 75,
+  "rejection_count_after": 75,
+  "rows": []
+}

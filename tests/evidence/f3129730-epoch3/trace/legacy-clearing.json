@@ -1,0 +1,10 @@
+{
+  "rows": [
+    {
+      "id": "legacy-change",
+      "vote": "b",
+      "trace_id": null
+    }
+  ],
+  "queue_length": 0
+}

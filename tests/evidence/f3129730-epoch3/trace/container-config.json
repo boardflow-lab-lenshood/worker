@@ -1,0 +1,50 @@
+[
+  {
+    "name": "/worker-input-test-c8fa7b814ca5-db",
+    "image_id": "sha256:54e0dd8e8cddcdbb9156c2486eed5a43eccb7214d7c6828097d41ce049fb3984",
+    "entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "cmd": [
+      "postgres"
+    ],
+    "labels": {
+      "boardflow.card_id": "f312973006e748058646b4729f18c7aa"
+    },
+    "network_mode": "worker-input-test-c8fa7b814ca5-network",
+    "port_bindings": {}
+  },
+  {
+    "name": "/worker-input-test-c8fa7b814ca5-redis",
+    "image_id": "sha256:6ba19c50b56777f5c11c58eff8ddb69d0d5f27ba131cffb63f180ccfd43c66af",
+    "entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "cmd": [
+      "redis-server"
+    ],
+    "labels": {
+      "boardflow.card_id": "f312973006e748058646b4729f18c7aa"
+    },
+    "network_mode": "worker-input-test-c8fa7b814ca5-network",
+    "port_bindings": {}
+  },
+  {
+    "name": "/worker-input-test-c8fa7b814ca5-worker",
+    "image_id": "sha256:a0456e5daf66fe398e0cfc7d4f089e61927626e4159e04155ced0c926b5dc2b2",
+    "entrypoint": [
+      "dotnet",
+      "Worker.dll"
+    ],
+    "cmd": null,
+    "labels": {
+      "aiworkforce.real-uat.repository": "worker",
+      "boardflow.card_id": "f312973006e748058646b4729f18c7aa",
+      "boardflow.execution_id": "49582800d7304bc1a93c578567d4cbde",
+      "org.opencontainers.image.revision": "c955288f250cfc4edf74675e106859aff56c6c60",
+      "org.opencontainers.image.source_tree": "5c216d123c6ba6dafa6cb0e36a6ea0066e33ab06"
+    },
+    "network_mode": "worker-input-test-c8fa7b814ca5-network",
+    "port_bindings": {}
+  }
+]

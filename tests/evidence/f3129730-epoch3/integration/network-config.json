@@ -1,0 +1,65 @@
+[
+    {
+        "Name": "worker-input-test-d2775f058d78-network",
+        "Id": "de9f184a517e208c850b33d33ccdb74369f9a50735487c1783dd8015c7ace87e",
+        "Created": "2026-11-02T19:08:32.663350029Z",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv4": true,
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": {},
+            "Config": [
+                {
+                    "Subnet": "192.168.48.0/20",
+                    "Gateway": "192.168.48.1"
+                }
+            ]
+        },
+        "Internal": true,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Options": {},
+        "Labels": {
+            "boardflow.card_id": "f312973006e748058646b4729f18c7aa"
+        },
+        "Containers": {
+            "2895cab4968777bb8c0a4126101365a2205e22268928f3170cd02736b513d928": {
+                "Name": "worker-input-test-d2775f058d78-redis",
+                "EndpointID": "2947fe55f05517e4d3fc028907517a212bda4592b354498d0808dc64701c6e3b",
+                "MacAddress": "0a:83:8d:a4:54:4d",
+                "IPv4Address": "192.168.48.3/20",
+                "IPv6Address": ""
+            },
+            "7e426c2e331be363674b1435ecabd4c09e5b4f1893a2590941b1ee6f57096c4c": {
+                "Name": "worker-input-test-d2775f058d78-db",
+                "EndpointID": "ddedf30444888d39af400fccaaeb6d98f889d585c291961ec5e51054d035f83a",
+                "MacAddress": "da:15:e2:8c:f6:12",
+                "IPv4Address": "192.168.48.2/20",
+                "IPv6Address": ""
+            },
+            "a339fced97f92cfda06dd1eee015b437ece7a681f1a53ad2434f3654831f0d9f": {
+                "Name": "worker-input-test-d2775f058d78-worker",
+                "EndpointID": "6a4deb41daf814c823e00589de5df380185bf34e40cd102d9524ac496c3e2fdc",
+                "MacAddress": "22:0b:b1:17:93:42",
+                "IPv4Address": "192.168.48.4/20",
+                "IPv6Address": ""
+            }
+        },
+        "Status": {
+            "IPAM": {
+                "Subnets": {
+                    "192.168.48.0/20": {
+                        "IPsInUse": 6,
+                        "DynamicIPsAvailable": 4090
+                    }
+                }
+            }
+        }
+    }
+]

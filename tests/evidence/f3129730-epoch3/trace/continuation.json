@@ -1,0 +1,10 @@
+{
+  "rows": [
+    {
+      "id": "after-bad-trace",
+      "vote": "b",
+      "trace_id": "Trace.after"
+    }
+  ],
+  "queue_length": 0
+}

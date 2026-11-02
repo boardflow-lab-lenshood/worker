@@ -1,0 +1,15 @@
+{
+  "image_id": "sha256:a0456e5daf66fe398e0cfc7d4f089e61927626e4159e04155ced0c926b5dc2b2",
+  "architecture": "arm64",
+  "labels": {
+    "aiworkforce.real-uat.repository": "worker",
+    "boardflow.card_id": "f312973006e748058646b4729f18c7aa",
+    "boardflow.execution_id": "49582800d7304bc1a93c578567d4cbde",
+    "org.opencontainers.image.revision": "c955288f250cfc4edf74675e106859aff56c6c60",
+    "org.opencontainers.image.source_tree": "5c216d123c6ba6dafa6cb0e36a6ea0066e33ab06"
+  },
+  "entrypoint": [
+    "dotnet",
+    "Worker.dll"
+  ]
+}

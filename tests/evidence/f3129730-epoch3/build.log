@@ -1,0 +1,49 @@
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon  9.007MB
+Step 1/12 : FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+ ---> d32bd65cf584
+Step 2/12 : WORKDIR /source
+ ---> Using cache
+ ---> f9e9003351b9
+Step 3/12 : COPY packages /packages
+ ---> Using cache
+ ---> b560ab9f3e06
+Step 4/12 : COPY Worker.csproj Program.cs ./
+ ---> e074a34077d3
+Step 5/12 : RUN dotnet restore -a arm64 --source /packages
+ ---> Running in 1e350e545a1f
+  Determining projects to restore...
+  Restored /source/Worker.csproj (in 123 ms).
+ ---> Removed intermediate container 1e350e545a1f
+ ---> 6afc7321cb39
+Step 6/12 : RUN dotnet publish -c release -o /app -a arm64 --self-contained false --no-restore
+ ---> Running in c0b58ecba9ff
+MSBuild version 17.7.6+77d58ec69 for .NET
+  Worker -> /source/bin/release/net7.0/linux-arm64/Worker.dll
+  Worker -> /app/
+ ---> Removed intermediate container c0b58ecba9ff
+ ---> 10434ba5d828
+Step 7/12 : FROM boardflow-real-uat/worker:c955288f250cfc4edf74675e106859aff56c6c60
+ ---> 2d5ab8a568cb
+Step 8/12 : WORKDIR /app
+ ---> Using cache
+ ---> fedbce2f71bb
+Step 9/12 : COPY --from=build /app .
+ ---> 2544d924bb27
+Step 10/12 : ENTRYPOINT ["dotnet", "Worker.dll"]
+ ---> Running in 7d4b22fd46fa
+ ---> Removed intermediate container 7d4b22fd46fa
+ ---> 7a64c1d2e63d
+Step 11/12 : LABEL boardflow.card_id=f312973006e748058646b4729f18c7aa
+ ---> Running in 2af55a0fe33c
+ ---> Removed intermediate container 2af55a0fe33c
+ ---> 246a5ef531f6
+Step 12/12 : LABEL boardflow.execution_id=49582800d7304bc1a93c578567d4cbde
+ ---> Running in 796ab47b958e
+ ---> Removed intermediate container 796ab47b958e
+ ---> a0456e5daf66
+Successfully built a0456e5daf66
+Successfully tagged worker-f3129730:epoch3

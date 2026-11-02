@@ -1,0 +1,6 @@
+Removed resources:
+worker-input-test-c8fa7b814ca5-worker
+worker-input-test-c8fa7b814ca5-redis
+worker-input-test-c8fa7b814ca5-db
+worker-input-test-c8fa7b814ca5-network
+Errors:

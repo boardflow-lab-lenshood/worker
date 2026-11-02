@@ -1,0 +1,10 @@
+test_rejects_without_writing_or_exiting_when_message_is_invalid (__main__.WorkerIntegrationTests.test_rejects_without_writing_or_exiting_when_message_is_invalid) ... ok
+test_stores_both_choices_when_valid_votes_follow_invalid_messages (__main__.WorkerIntegrationTests.test_stores_both_choices_when_valid_votes_follow_invalid_messages) ... ok
+test_stores_exact_ids_when_strings_meet_length_and_whitespace_rules (__main__.WorkerIntegrationTests.test_stores_exact_ids_when_strings_meet_length_and_whitespace_rules) ... ok
+test_updates_existing_vote_when_same_voter_changes_from_a_to_b (__main__.WorkerIntegrationTests.test_updates_existing_vote_when_same_voter_changes_from_a_to_b) ... ok
+test_z_reports_database_error_when_valid_vote_violates_database_constraint (__main__.WorkerIntegrationTests.test_z_reports_database_error_when_valid_vote_violates_database_constraint) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 72.261s
+
+OK

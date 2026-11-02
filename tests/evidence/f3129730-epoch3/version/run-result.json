@@ -1,0 +1,16 @@
+{
+  "command": [
+    "python3",
+    "/Users/xuhai.zhang/.codex/worktrees/board-delivery-legacy-cleanup/aiworkforce-platform/.codex/multicard-20261101/workspaces/da271bdcc03741c293e6a0feeefc1238/\u4e03\u5361\u53cc\u6279\u5f00\u53d1 Agent/f3129730-worker/tests/version.py",
+    "--image",
+    "worker-f3129730:epoch3",
+    "--evidence-dir",
+    "/Users/xuhai.zhang/.codex/worktrees/board-delivery-legacy-cleanup/aiworkforce-platform/.codex/multicard-20261101/workspaces/da271bdcc03741c293e6a0feeefc1238/\u4e03\u5361\u53cc\u6279\u5f00\u53d1 Agent/f3129730-worker/tests/evidence/f3129730-epoch3/version",
+    "--owner-card",
+    "f312973006e748058646b4729f18c7aa"
+  ],
+  "timeout_seconds": 240,
+  "exit_code": 0,
+  "timed_out": false,
+  "duration_seconds": 2.427
+}

@@ -1,0 +1,10 @@
+{
+  "rows": [
+    {
+      "id": "unchanged",
+      "vote": "a",
+      "trace_id": "Trace.original"
+    }
+  ],
+  "queue_length": 0
+}

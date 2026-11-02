@@ -1,0 +1,12 @@
+# Rebuild synchronized epoch 3 source with no build network.
+# The cached c955 image supplies only the .NET runtime; all /app output is rebuilt.
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+WORKDIR /source
+COPY packages /packages
+COPY Worker.csproj Program.cs ./
+RUN dotnet restore -a arm64 --source /packages
+RUN dotnet publish -c release -o /app -a arm64 --self-contained false --no-restore
+FROM boardflow-real-uat/worker:c955288f250cfc4edf74675e106859aff56c6c60
+WORKDIR /app
+COPY --from=build /app .
+ENTRYPOINT ["dotnet", "Worker.dll"]
