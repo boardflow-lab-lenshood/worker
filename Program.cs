@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
-using Newtonsoft.Json;
+using System.Text.Json;
 using Npgsql;
 using StackExchange.Redis;
 
@@ -26,7 +26,6 @@ namespace Worker
                 var keepAliveCommand = pgsql.CreateCommand();
                 keepAliveCommand.CommandText = "SELECT 1";
 
-                var definition = new { vote = "", voter_id = "" };
                 while (true)
                 {
                     // Slow down to prevent CPU spike, only query each 100ms
@@ -41,8 +40,10 @@ namespace Worker
                     string json = redis.ListLeftPopAsync("votes").Result;
                     if (json != null)
                     {
-                        var vote = JsonConvert.DeserializeAnonymousType(json, definition);
-                        Console.WriteLine($"Processing vote for '{vote.vote}' by '{vote.voter_id}'");
+                        if (!TryReadVote(json, out var voterId, out var vote))
+                        {
+                            continue;
+                        }
                         // Reconnect DB if down
                         if (!pgsql.State.Equals(System.Data.ConnectionState.Open))
                         {
@@ -52,7 +53,7 @@ namespace Worker
                         }
                         else
                         { // Normal +1 vote requested
-                            UpdateVote(pgsql, vote.voter_id, vote.vote);
+                            UpdateVote(pgsql, voterId, vote);
                         }
                     }
                     else
@@ -65,6 +66,75 @@ namespace Worker
             {
                 Console.Error.WriteLine(ex.ToString());
                 return 1;
+            }
+        }
+
+        private enum RejectionReason
+        {
+            InvalidJson,
+            NonObject,
+            MissingVoterId,
+            MissingVote,
+            InvalidVoterIdType,
+            InvalidVoteType,
+            InvalidVoterId,
+            InvalidVote
+        }
+
+        private static bool RejectVote(RejectionReason reason)
+        {
+            Console.Error.WriteLine(JsonSerializer.Serialize(new
+            {
+                @event = "vote_rejected",
+                reason = reason.ToString()
+            }));
+            return false;
+        }
+
+        private static bool TryReadVote(string json, out string voterId, out string vote)
+        {
+            voterId = null;
+            vote = null;
+            JsonDocument message;
+            try
+            {
+                message = JsonDocument.Parse(json);
+            }
+            catch (JsonException)
+            {
+                return RejectVote(RejectionReason.InvalidJson);
+            }
+
+            using (message)
+            {
+                var root = message.RootElement;
+                if (root.ValueKind != JsonValueKind.Object)
+                    return RejectVote(RejectionReason.NonObject);
+                try
+                {
+                    if (!root.TryGetProperty("voter_id", out var idField))
+                        return RejectVote(RejectionReason.MissingVoterId);
+                    if (!root.TryGetProperty("vote", out var voteField))
+                        return RejectVote(RejectionReason.MissingVote);
+                    if (idField.ValueKind != JsonValueKind.String)
+                        return RejectVote(RejectionReason.InvalidVoterIdType);
+                    if (voteField.ValueKind != JsonValueKind.String)
+                        return RejectVote(RejectionReason.InvalidVoteType);
+
+                    voterId = idField.GetString();
+                    vote = voteField.GetString();
+                }
+                catch (InvalidOperationException)
+                {
+                    // Invalid escaped UTF-16 can fail decoding in property lookup or GetString.
+                    return RejectVote(RejectionReason.InvalidJson);
+                }
+                if (string.IsNullOrWhiteSpace(voterId) || voterId.Contains('\0') ||
+                    voterId.EnumerateRunes().Take(256).Count() > 255)
+                    return RejectVote(RejectionReason.InvalidVoterId);
+                if (vote != "a" && vote != "b")
+                    return RejectVote(RejectionReason.InvalidVote);
+                return true;
             }
         }
 
@@ -142,7 +212,7 @@ namespace Worker
                 command.Parameters.AddWithValue("@vote", vote);
                 command.ExecuteNonQuery();
             }
-            catch (DbException)
+            catch (PostgresException ex) when (ex.SqlState == PostgresErrorCodes.UniqueViolation)
             {
                 command.CommandText = "UPDATE votes SET vote = @vote WHERE id = @id";
                 command.ExecuteNonQuery();
