@@ -43,6 +43,21 @@ python3 -c 'from pathlib import Path; Path("/tmp/worker-seven-b.Dockerfile").wri
 DOCKER_BUILDKIT=0 docker build -f /tmp/worker-seven-b.Dockerfile --build-arg BUILDPLATFORM=linux/arm64 --build-arg TARGETPLATFORM=linux/arm64 --build-arg TARGETARCH=arm64 -t worker-seven-b:test .
 ```
 
+If NuGet is unreachable, a test-only offline recipe compiles the current
+`Program.cs` with the cached .NET SDK against the unmodified Npgsql/Redis
+assemblies in the exact baseline image, retaining that image's runtime files:
+
+```sh
+DOCKER_BUILDKIT=0 docker build -f tests/Dockerfile.offline -t worker-seven-b:test .
+```
+
+This requires the locally available
+`boardflow-real-uat/worker:c955288f250cfc4edf74675e106859aff56c6c60` image.
+The fallback builds a new `Worker.dll`; it does not reuse the old worker program.
+It verifies the actual current program and existing dependency versions, but
+cannot demonstrate a fresh NuGet package restore. Record that limitation with
+the evidence when using the fallback.
+
 The trace runner inherits every existing input validation test and adds old
 schema/data migration, repeated startups, ASCII boundaries, invalid traces,
 exact persistence, trace replacement, legacy clearing, invalid-update

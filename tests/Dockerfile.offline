@@ -1,0 +1,13 @@
+# Compile current source against the dependencies in the fixed baseline image.
+# This is a test-only fallback when NuGet cannot be reached.
+ARG WORKER_BASE=boardflow-real-uat/worker:c955288f250cfc4edf74675e106859aff56c6c60
+FROM ${WORKER_BASE} AS dependencies
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+WORKDIR /source
+COPY --from=dependencies /app /dependencies
+COPY tests/Worker.offline.csproj Worker.csproj
+COPY Program.cs .
+RUN dotnet publish -c Release -o /out -p:UseAppHost=false --ignore-failed-sources
+FROM dependencies
+COPY --from=build /out/Worker.dll /app/Worker.dll
+COPY --from=build /out/Worker.pdb /app/Worker.pdb

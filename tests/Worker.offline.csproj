@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Npgsql">
+      <HintPath>/dependencies/Npgsql.dll</HintPath>
+    </Reference>
+    <Reference Include="StackExchange.Redis">
+      <HintPath>/dependencies/StackExchange.Redis.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>
