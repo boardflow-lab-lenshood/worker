@@ -1,9 +1,9 @@
 # Validation recorded 2026-11-02
 
-Card: `0ccc299aefe347138d6c8748be05eb25`  
-Execution: `99f3f4f4acbb43bebb42a052e0c2e264`  
-Worker baseline: `63b108d38ff3f829fd1f1291d4e431cdae55700c`  
-PR base: `codex/arena-three-20261102-latest`
+- Card: `0ccc299aefe347138d6c8748be05eb25`
+- Execution: `99f3f4f4acbb43bebb42a052e0c2e264`
+- Worker baseline: `63b108d38ff3f829fd1f1291d4e431cdae55700c`
+- PR base: `codex/arena-three-20261102-latest`
 
 The final disposable Redis 7 → worker (.NET 7) → PostgreSQL 15 suite passed all five tests in 157.589 seconds. All 44 invalid-input cases passed. Valid `a` and `b` votes after rejection, exact voter-ID boundaries, and the existing-voter `a` → `b` update passed. A deliberately installed database CHECK constraint produced SQLSTATE `23514`, an Npgsql exception stack, and worker exit code 1, proving that a database error is not swallowed as an input rejection.
 
